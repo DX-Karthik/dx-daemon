@@ -1,5 +1,5 @@
 {
-  "maxRetries": 3,
+  "maxRetries": 5,
   "baseBackoffMs": 100,
   "jobs": [
     {
