@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dx-daemon"
+version = "0.1.0"
+description = "A lightweight daemon starter for DX workflows"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "DX Karthik" }
+]
+dependencies = []
+
+[project.scripts]
+dx-daemon = "dx_daemon.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
