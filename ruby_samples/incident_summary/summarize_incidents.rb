@@ -4,6 +4,37 @@
 require "json"
 require "time"
 
+def parse_args(argv)
+  options = { format: "text", input_path: nil }
+  args = argv.dup
+
+  while args.any?
+    token = args.shift
+    case token
+    when "--format"
+      value = args.shift
+      if value.nil? || !%w[text json].include?(value)
+        warn "Invalid --format value. Use 'text' or 'json'."
+        exit 1
+      end
+      options[:format] = value
+    when "--help", "-h"
+      puts "Usage: ruby summarize_incidents.rb [--format text|json] <incidents.jsonl>"
+      exit 0
+    else
+      options[:input_path] = token
+      break
+    end
+  end
+
+  if options[:input_path].nil?
+    warn "Usage: ruby summarize_incidents.rb [--format text|json] <incidents.jsonl>"
+    exit 1
+  end
+
+  options
+end
+
 def read_incidents(path)
   File.readlines(path, chomp: true).map do |line|
     next if line.strip.empty?
@@ -89,12 +120,8 @@ def print_summary(summary)
   end
 end
 
-if ARGV.length != 1
-  warn "Usage: ruby summarize_incidents.rb <incidents.jsonl>"
-  exit 1
-end
-
-input_path = ARGV[0]
+options = parse_args(ARGV)
+input_path = options[:input_path]
 unless File.exist?(input_path)
   warn "Input file not found: #{input_path}"
   exit 1
@@ -102,4 +129,8 @@ end
 
 incidents = read_incidents(input_path)
 summary = summarize(incidents)
-print_summary(summary)
+if options[:format] == "json"
+  puts JSON.pretty_generate(summary)
+else
+  print_summary(summary)
+end
