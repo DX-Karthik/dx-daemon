@@ -20,16 +20,22 @@ source .venv/bin/activate
 pip install -e .
 ```
 
-3. Run the daemon:
+3. Run the heartbeat daemon:
 
 ```bash
-dx-daemon --interval 2
+dx-daemon daemon --interval 2
 ```
 
 To run for a fixed number of iterations:
 
 ```bash
-dx-daemon --interval 1 --max-iterations 5
+dx-daemon daemon --interval 1 --max-iterations 5
+```
+
+Monitor an HTTP endpoint:
+
+```bash
+dx-daemon healthcheck --url "https://example.com" --interval 10 --timeout 3
 ```
 
 ## Development
@@ -37,7 +43,7 @@ dx-daemon --interval 1 --max-iterations 5
 Run directly without installing:
 
 ```bash
-PYTHONPATH=src python3 -m dx_daemon --interval 1
+PYTHONPATH=src python3 -m dx_daemon.cli daemon --interval 1
 ```
 
 ## Next ideas
