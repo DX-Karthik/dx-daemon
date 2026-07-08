@@ -1,0 +1,27 @@
+{
+  "maxRetries": 3,
+  "baseBackoffMs": 100,
+  "jobs": [
+    {
+      "id": "job-101",
+      "payload": {
+        "task": "sync-users"
+      },
+      "failuresBeforeSuccess": 0
+    },
+    {
+      "id": "job-102",
+      "payload": {
+        "task": "sync-invoices"
+      },
+      "failuresBeforeSuccess": 2
+    },
+    {
+      "id": "job-103",
+      "payload": {
+        "task": "sync-permissions"
+      },
+      "failuresBeforeSuccess": 4
+    }
+  ]
+}
