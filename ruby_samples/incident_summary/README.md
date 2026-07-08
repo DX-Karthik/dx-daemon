@@ -15,6 +15,12 @@ cd ruby_samples/incident_summary
 ruby summarize_incidents.rb sample_incidents.jsonl
 ```
 
+Output JSON instead of text:
+
+```bash
+ruby summarize_incidents.rb --format json sample_incidents.jsonl
+```
+
 ## Input format
 
 Each line in the input file should be a JSON object like:
