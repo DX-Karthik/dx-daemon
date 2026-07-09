@@ -1,4 +1,4 @@
-# calculate_stats.py
+# stats.py
 """
 A script that calculates the basic statistical metrics of a list of numbers.
 """
@@ -12,7 +12,13 @@ def analyze_numbers(numbers):
     average = total_sum / count
     highest = max(numbers)
     lowest = min(numbers)
-    median = sorted(numbers)[len(numbers) // 2]
+
+    ordered = sorted(numbers)
+    mid = count // 2
+    if count % 2 == 0:
+        median = (ordered[mid - 1] + ordered[mid]) / 2
+    else:
+        median = ordered[mid]
 
     return {
         "sum": total_sum,
