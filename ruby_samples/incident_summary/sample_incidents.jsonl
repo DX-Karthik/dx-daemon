@@ -1,0 +1,5 @@
+{"id":"INC-101","service":"payments","severity":"critical","opened_at":"2026-07-07T10:00:00Z","resolved_at":"2026-07-07T10:42:00Z"}
+{"id":"INC-102","service":"auth","severity":"high","opened_at":"2026-07-07T11:05:00Z","resolved_at":"2026-07-07T11:25:00Z"}
+{"id":"INC-103","service":"payments","severity":"medium","opened_at":"2026-07-07T12:15:00Z","resolved_at":""}
+{"id":"INC-104","service":"search","severity":"low","opened_at":"2026-07-07T13:20:00Z","resolved_at":"2026-07-07T13:35:00Z"}
+{"id":"INC-105","service":"auth","severity":"high","opened_at":"2026-07-07T14:10:00Z","resolved_at":"2026-07-07T14:55:00Z"}
