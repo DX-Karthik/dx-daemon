@@ -10,45 +10,46 @@ import os
 from datetime import datetime
 
 
-def greet_user(name: str) -> str:
-    """Generates a personalized greeting based on the current time."""
-    current_hour = datetime.now().hour
+def greet_user(name: str, language: str) -> str:
+    """Generates a personalized greeting based on time and language."""
+    now = datetime.now()
+    current_hour = now.hour
+    current_date = now.strftime("%B %d, %Y")
+    language = language.lower().strip()
+
+    greeting_map = {
+        "english": {
+            "morning": "Good morning",
+            "afternoon": "Good afternoon",
+            "evening": "Good evening",
+        },
+        "spanish": {
+            "morning": "Buenos dias",
+            "afternoon": "Buenas tardes",
+            "evening": "Buenas noches",
+        },
+        "french": {
+            "morning": "Bonjour",
+            "afternoon": "Bon apres-midi",
+            "evening": "Bonsoir",
+        },
+        "hindi": {
+            "morning": "Suprabhat",
+            "afternoon": "Namaste",
+            "evening": "Shubh sandhya",
+        },
+    }
+
+    selected_language = greeting_map.get(language, greeting_map["english"])
 
     if current_hour < 12:
-        greeting = "Good morning"
+        greeting = selected_language["morning"]
     elif current_hour < 18:
-        greeting = "Good afternoon"
+        greeting = selected_language["afternoon"]
     else:
-        greeting = "Good evening"
+        greeting = selected_language["evening"]
 
-    return f"{greeting}, {name}!"
-
-
-def process_numbers(limit: int):
-    """Loops through numbers, classifying them as even or odd."""
-    print(f"\n--- Classifying numbers from 1 to {limit} ---")
-    for num in range(1, limit + 1):
-        status = "even" if num % 2 == 0 else "odd"
-        print(f"Number {num} is {status}.")
-
-
-def safe_divide(a: float, b: float):
-    """Demonstrates error handling during division."""
-    print(f"\n--- Attempting Division: {a} / {b} ---")
-    try:
-        result = a / b
-        print(f"Success! Result: {result}")
-    except ZeroDivisionError:
-        print("Error: You cannot divide a number by zero.")
-
-
-def check_system_directory():
-    """Checks the existence of the current working directory."""
-    print("\n--- System Check ---")
-    current_dir = os.getcwd()
-    print(f"Current Working Directory: {current_dir}")
-    if os.path.exists(current_dir):
-        print("Status: Directory verified and accessible.")
+    return f"{greeting}, {name}! Today's date is {current_date}."
 
 
 def main():
@@ -56,19 +57,14 @@ def main():
     print("=== START OF PYTHON SCRIPT ===")
 
     # 1. User Input & Greeting
-    user_name = input("Please enter your name: ").strip() or "Guest"
-    welcome_message = greet_user(user_name)
+    user_name = input("Please enter your name here please: ").strip() or "Guest"
+    preferred_language = (
+        input("Choose a greeting language from the list of languages (English/Spanish/French/Hindi): ").strip()
+        or "English"
+    )
+    welcome_message = greet_user(user_name, preferred_language)
     print(welcome_message)
 
-    # 2. Control Flow & Loops
-    process_numbers(limit=5)
-
-    # 3. Error Handling (Try/Except)
-    safe_divide(10, 2)
-    safe_divide(10, 0)
-
-    # 4. OS Interaction
-    check_system_directory()
 
     print("\n=== END OF PYTHON SCRIPT ===")
 
