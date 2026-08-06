@@ -10,44 +10,17 @@ import os
 from datetime import datetime
 
 
-def greet_user(name: str, language: str) -> str:
-    """Generates a personalized greeting based on time and language."""
+def greet_user(name: str) -> str:
+    """Generates a personalized greeting based on time."""
     now = datetime.now()
     current_hour = now.hour
     current_date = now.strftime("%B %d, %Y")
-    language = language.lower().strip()
-
-    greeting_map = {
-        "english": {
-            "morning": "Good morning",
-            "afternoon": "Good afternoon",
-            "evening": "Good evening",
-        },
-        "spanish": {
-            "morning": "Buenos dias",
-            "afternoon": "Buenas tardes",
-            "evening": "Buenas noches",
-        },
-        "french": {
-            "morning": "Bonjour",
-            "afternoon": "Bon apres-midi",
-            "evening": "Bonsoir",
-        },
-        "hindi": {
-            "morning": "Suprabhat",
-            "afternoon": "Namaste",
-            "evening": "Shubh sandhya",
-        },
-    }
-
-    selected_language = greeting_map.get(language, greeting_map["english"])
-
     if current_hour < 12:
-        greeting = selected_language["morning"]
+        greeting = "Good morning"
     elif current_hour < 18:
-        greeting = selected_language["afternoon"]
+        greeting = "Good afternoon"
     else:
-        greeting = selected_language["evening"]
+        greeting = "Good evening"
 
     return f"{greeting}, {name}! Today's date is {current_date}."
 
@@ -58,11 +31,7 @@ def main():
 
     # 1. User Input & Greeting
     user_name = input("Please enter your name here please: ").strip() or "Guest"
-    preferred_language = (
-        input("Choose a greeting language from the list of languages (English/Spanish/French/Hindi): ").strip()
-        or "English"
-    )
-    welcome_message = greet_user(user_name, preferred_language)
+    welcome_message = greet_user(user_name)
     print(welcome_message)
 
 
