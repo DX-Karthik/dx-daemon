@@ -2,6 +2,8 @@
 
 A lightweight Python daemon starter for DX experiments.
 
+Repository: https://github.com/DX-Karthik/dx-daemon
+
 ## What this includes
 
 - A small long-running daemon loop with heartbeat logging
