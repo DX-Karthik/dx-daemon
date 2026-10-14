@@ -21,6 +21,12 @@ Output JSON instead of text:
 ruby summarize_incidents.rb --format json sample_incidents.jsonl
 ```
 
+Generate a per-service reliability report:
+
+```bash
+ruby service_report.rb sample_incidents.jsonl
+```
+
 ## Input format
 
 Each line in the input file should be a JSON object like:

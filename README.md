@@ -1,6 +1,10 @@
 # dx-daemon
 
+Hello from the README update.
+
 A lightweight Python daemon starter for DX experiments.
+
+Repository: https://github.com/DX-Karthik/dx-daemon
 
 ## What this includes
 
