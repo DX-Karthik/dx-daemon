@@ -1,8 +1,8 @@
 import argparse
 import logging
 
-from .daemon import run_daemon
 from .cli_healthcheck import add_healthcheck_subcommand, run_healthcheck_from_args
+from .daemon import run_daemon
 
 
 def build_parser() -> argparse.ArgumentParser:

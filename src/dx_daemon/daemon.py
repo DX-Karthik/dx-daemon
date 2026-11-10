@@ -4,7 +4,6 @@ import time
 from dataclasses import dataclass
 from typing import Optional
 
-
 LOGGER = logging.getLogger("dx_daemon")
 
 

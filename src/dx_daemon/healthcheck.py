@@ -3,8 +3,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
-from typing import Dict, Optional
-
+from typing import Optional
 
 LOGGER = logging.getLogger("dx_daemon.healthcheck")
 
@@ -17,7 +16,7 @@ class HealthCheckResult:
     latency_ms: float
     error: Optional[str] = None
 
-    def to_dict(self) -> Dict[str, object]:
+    def to_dict(self) -> dict[str, object]:
         return {
             "url": self.url,
             "status_code": self.status_code,

@@ -11,8 +11,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Requires Python 3.9+. No runtime dependencies (standard library only).
 
 ```bash
-# Setup
-python3 -m venv .venv && source .venv/bin/activate && pip install -e .
+# Setup (the pip upgrade is required: stock Python 3.9 ships pip 21.2.4, which
+# predates PEP 660 and cannot do an editable install of a pyproject-only project)
+python3 -m venv .venv && source .venv/bin/activate && pip install --upgrade pip && pip install -e .
 
 # Run via installed console script
 dx-daemon daemon --interval 2
@@ -25,7 +26,17 @@ PYTHONPATH=src python3 -m dx_daemon.cli daemon --interval 1
 
 `--log-level {DEBUG,INFO,WARNING,ERROR}` is a top-level flag on the root parser, so it must precede the subcommand.
 
-There is no test suite, linter, or formatter configured in this repo.
+Linting and formatting use Ruff, configured in `pyproject.toml` and installed via the `dev` extra:
+
+```bash
+pip install -e ".[dev]"
+ruff check src/dx_daemon        # add --fix to auto-fix
+ruff format src/dx_daemon
+```
+
+Ruff covers only the five package files (`cli.py`, `cli_healthcheck.py`, `daemon.py`, `healthcheck.py`, `__init__.py`); the standalone scratch scripts under `src/dx_daemon/` plus `javascript_samples/` and `ruby_samples/` are listed in `extend-exclude`. `target-version = "py39"` is tied to the `requires-python` floor — do not let `UP` rules introduce 3.10+ syntax. `line-length = 100` accommodates the existing long log/signature lines.
+
+There is no test suite configured in this repo.
 
 ## Architecture
 

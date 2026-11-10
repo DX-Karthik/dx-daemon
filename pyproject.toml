@@ -13,6 +13,9 @@ authors = [
 ]
 dependencies = []
 
+[project.optional-dependencies]
+dev = ["ruff>=0.14"]
+
 [project.scripts]
 dx-daemon = "dx_daemon.cli:main"
 
@@ -21,3 +24,25 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+# Honor the excludes below even when a file is named explicitly on the command
+# line (editors and pre-commit pass file paths directly).
+force-exclude = true
+extend-exclude = [
+  # Standalone scratch scripts, not part of the package (see spec.md section 1).
+  "src/dx_daemon/sample_script.py",
+  "src/dx_daemon/math_functions.py",
+  "src/dx_daemon/number_crunch.py",
+  "src/dx_daemon/stats.py",
+  "src/dx_daemon/file_organizer.py",
+  "src/dx_daemon/compress_images.py",
+  "src/dx_daemon/img_to_jpeg.py",
+  "javascript_samples",
+  "ruby_samples",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
